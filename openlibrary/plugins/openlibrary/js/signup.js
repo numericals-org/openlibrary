@@ -20,55 +20,55 @@ export function initSignupForm() {
     const USERNAME_MINLENGTH = 3;
     const USERNAME_MAXLENGTH = 20;
 
-  // Callback that is called when grecaptcha.execute() is successful
-  function submitCreateAccountForm() {
-    signupForm.submit();
-  }
-  window.submitCreateAccountForm = submitCreateAccountForm;
-
-  // Checks whether reportValidity exists for cross-browser compatibility
-  // Includes invalid input count to account for checks not covered by reportValidity
-  $(signupForm).on("submit", function (e) {
-    e.preventDefault();
-    validatePDSelection();
-    const numInvalidInputs = signupForm.querySelectorAll(".invalid").length;
-    const isFormattingValid =
-      !signupForm.reportValidity || signupForm.reportValidity();
-    if (numInvalidInputs === 0 && isFormattingValid && window.grecaptcha) {
-      $(submitBtn).prop("disabled", true).text(i18nStrings["loading_text"]);
-      window.grecaptcha.execute();
+    // Callback that is called when grecaptcha.execute() is successful
+    function submitCreateAccountForm() {
+        signupForm.submit();
     }
-  });
+    window.submitCreateAccountForm = submitCreateAccountForm;
 
-  $("#username").on("keyup", function () {
-    const value = $(this).val();
-    $("#userUrl").addClass("darkgreen").text(value).css("font-weight", "700");
-  });
+    // Checks whether reportValidity exists for cross-browser compatibility
+    // Includes invalid input count to account for checks not covered by reportValidity
+    $(signupForm).on('submit', function (e) {
+        e.preventDefault();
+        validatePDSelection();
+        const numInvalidInputs = signupForm.querySelectorAll('.invalid').length;
+        const isFormattingValid =
+      !signupForm.reportValidity || signupForm.reportValidity();
+        if (numInvalidInputs === 0 && isFormattingValid && window.grecaptcha) {
+            $(submitBtn).prop('disabled', true).text(i18nStrings['loading_text']);
+            window.grecaptcha.execute();
+        }
+    });
 
-  /**
+    $('#username').on('keyup', function () {
+        const value = $(this).val();
+        $('#userUrl').addClass('darkgreen').text(value).css('font-weight', '700');
+    });
+
+    /**
    * Renders an error message for a given input in a given error div.
    *
    * @param {string} inputId The ID (incl #) of the input the error relates to
    * @param {string} errorDiv The ID (incl #) of the div where the error msg will be rendered
    * @param {string} errorMsg The error message text
    */
-  function renderError(inputId, errorDiv, errorMsg) {
-    $(inputId).addClass("invalid");
-    $(`label[for=${inputId.slice(1)}]`).addClass("invalid");
-    $(errorDiv).text(errorMsg);
-  }
+    function renderError(inputId, errorDiv, errorMsg) {
+        $(inputId).addClass('invalid');
+        $(`label[for=${inputId.slice(1)}]`).addClass('invalid');
+        $(errorDiv).text(errorMsg);
+    }
 
-  /**
+    /**
    * Clears error styling and message for a given input and error div.
    *
    * @param {string} inputId The ID (incl #) of the input the error relates to
    * @param {string} errorDiv The ID (incl #) of the div where the error msg is currently rendered
    */
-  function clearError(inputId, errorDiv) {
-    $(inputId).removeClass("invalid");
-    $(`label[for=${inputId.slice(1)}]`).removeClass("invalid");
-    $(errorDiv).text("");
-  }
+    function clearError(inputId, errorDiv) {
+        $(inputId).removeClass('invalid');
+        $(`label[for=${inputId.slice(1)}]`).removeClass('invalid');
+        $(errorDiv).text('');
+    }
 
     function validateUsername() {
         const value_username = $('#username').val();
@@ -171,9 +171,9 @@ export function initSignupForm() {
             return
         }
 
-    clearError("#pd_program", "#pd_programMessage");
-    pdaSelector.setAttribute("aria-invalid", "false");
-  }
+        clearError('#pd_program', '#pd_programMessage');
+        pdaSelector.setAttribute('aria-invalid', 'false');
+    }
 
     // Maps input ID attribute to corresponding validation function
     function validateInput(input) {
@@ -226,9 +226,9 @@ export function initSignupForm() {
 
     rpdCheckbox.addEventListener('change', updateSelectorVisibility)
 
-  // On page reload, display PD program options and validate selection
-  updateSelectorVisibility();
-  validatePDSelection();
+    // On page reload, display PD program options and validate selection
+    updateSelectorVisibility();
+    validatePDSelection();
 
     const iframe = document.getElementById('ia-third-party-logins');
 
@@ -253,7 +253,7 @@ export function initLoginForm() {
     const loginForm = $('form[name=login]');
     const loadingText = loginForm.data('i18n')['loading_text'];
 
-  loginForm.on("submit", () => {
-    $("button[type=submit]").prop("disabled", true).text(loadingText);
-  });
+    loginForm.on('submit', () => {
+        $('button[type=submit]').prop('disabled', true).text(loadingText);
+    });
 }
