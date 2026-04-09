@@ -20,25 +20,25 @@ export function initSignupForm() {
     const USERNAME_MINLENGTH = 3;
     const USERNAME_MAXLENGTH = 20;
 
-  // Callback that is called when grecaptcha.execute() is successful
-  function submitCreateAccountForm() {
-    signupForm.submit();
-  }
-  window.submitCreateAccountForm = submitCreateAccountForm
-
-  // Checks whether reportValidity exists for cross-browser compatibility
-  // Includes invalid input count to account for checks not covered by reportValidity
-  $(signupForm).on("submit", function(e) {
-    e.preventDefault();
-    validatePDSelection()
-    const numInvalidInputs = signupForm.querySelectorAll(".invalid").length;
-    const isFormattingValid = !signupForm.reportValidity || signupForm.reportValidity();
-    if (numInvalidInputs === 0 && isFormattingValid && window.grecaptcha) {
-      $(submitBtn).prop("disabled", true).text(i18nStrings["loading_text"]);
-      window.grecaptcha.execute();
+    // Callback that is called when grecaptcha.execute() is successful
+    function submitCreateAccountForm() {
+        signupForm.submit();
     }
-    window.submitCreateAccountForm = submitCreateAccountForm;
-  })
+    window.submitCreateAccountForm = submitCreateAccountForm
+
+    // Checks whether reportValidity exists for cross-browser compatibility
+    // Includes invalid input count to account for checks not covered by reportValidity
+    $(signupForm).on('submit', function(e) {
+        e.preventDefault();
+        validatePDSelection()
+        const numInvalidInputs = signupForm.querySelectorAll('.invalid').length;
+        const isFormattingValid = !signupForm.reportValidity || signupForm.reportValidity();
+        if (numInvalidInputs === 0 && isFormattingValid && window.grecaptcha) {
+            $(submitBtn).prop('disabled', true).text(i18nStrings['loading_text']);
+            window.grecaptcha.execute();
+        }
+        window.submitCreateAccountForm = submitCreateAccountForm;
+    })
 
     $('#username').on('keyup', function () {
         const value = $(this).val();
@@ -171,9 +171,9 @@ export function initSignupForm() {
             return
         }
 
-    clearError("#pd_program", "#pd_programMessage")
-    pdaSelector.setAttribute("aria-invalid", "false");
-  }
+        clearError('#pd_program', '#pd_programMessage')
+        pdaSelector.setAttribute('aria-invalid', 'false');
+    }
 
     // Maps input ID attribute to corresponding validation function
     function validateInput(input) {
@@ -253,7 +253,7 @@ export function initLoginForm() {
     const loginForm = $('form[name=login]');
     const loadingText = loginForm.data('i18n')['loading_text'];
 
-  loginForm.on("submit", () => {
-    $("button[type=submit]").prop("disabled", true).text(loadingText);
-  })
+    loginForm.on('submit', () => {
+        $('button[type=submit]').prop('disabled', true).text(loadingText);
+    })
 }
