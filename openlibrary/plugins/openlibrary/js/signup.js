@@ -26,18 +26,18 @@ export function initSignupForm() {
     }
     window.submitCreateAccountForm = submitCreateAccountForm
 
-  // Checks whether reportValidity exists for cross-browser compatibility
-  // Includes invalid input count to account for checks not covered by reportValidity
-  $(signupForm).on("submit", function(e) {
-    e.preventDefault();
-    validatePDSelection()
-    const numInvalidInputs = signupForm.querySelectorAll(".invalid").length;
-    const isFormattingValid = !signupForm.reportValidity || signupForm.reportValidity();
-    if (numInvalidInputs === 0 && isFormattingValid && window.grecaptcha) {
-      $(submitBtn).prop("disabled", true).text(i18nStrings["loading_text"]);
-      window.grecaptcha.execute();
-    }
-  })
+    // Checks whether reportValidity exists for cross-browser compatibility
+    // Includes invalid input count to account for checks not covered by reportValidity
+    $(signupForm).on('submit', function(e) {
+        e.preventDefault();
+        validatePDSelection()
+        const numInvalidInputs = signupForm.querySelectorAll('.invalid').length;
+        const isFormattingValid = !signupForm.reportValidity || signupForm.reportValidity();
+        if (numInvalidInputs === 0 && isFormattingValid && window.grecaptcha) {
+            $(submitBtn).prop('disabled', true).text(i18nStrings['loading_text']);
+            window.grecaptcha.execute();
+        }
+    })
 
     $('#username').on('keyup', function(){
         const value = $(this).val();
