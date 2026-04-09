@@ -26,32 +26,31 @@ export function initSignupForm() {
     }
     window.submitCreateAccountForm = submitCreateAccountForm
 
-    // Checks whether reportValidity exists for cross-browser compatibility
-    // Includes invalid input count to account for checks not covered by reportValidity
-    $(signupForm).on('submit', function(e) {
-        e.preventDefault();
-        validatePDSelection()
-        const numInvalidInputs = signupForm.querySelectorAll('.invalid').length;
-        const isFormattingValid = !signupForm.reportValidity || signupForm.reportValidity();
-        if (numInvalidInputs === 0 && isFormattingValid && window.grecaptcha) {
-            $(submitBtn).prop('disabled', true).text(i18nStrings['loading_text']);
-            window.grecaptcha.execute();
-        }
-        window.submitCreateAccountForm = submitCreateAccountForm;
-    })
+  // Checks whether reportValidity exists for cross-browser compatibility
+  // Includes invalid input count to account for checks not covered by reportValidity
+  $(signupForm).on("submit", function(e) {
+    e.preventDefault();
+    validatePDSelection()
+    const numInvalidInputs = signupForm.querySelectorAll(".invalid").length;
+    const isFormattingValid = !signupForm.reportValidity || signupForm.reportValidity();
+    if (numInvalidInputs === 0 && isFormattingValid && window.grecaptcha) {
+      $(submitBtn).prop("disabled", true).text(i18nStrings["loading_text"]);
+      window.grecaptcha.execute();
+    }
+  })
 
-    $('#username').on('keyup', function () {
+    $('#username').on('keyup', function(){
         const value = $(this).val();
-        $('#userUrl').addClass('darkgreen').text(value).css('font-weight', '700');
+        $('#userUrl').addClass('darkgreen').text(value).css('font-weight','700');
     });
 
     /**
-   * Renders an error message for a given input in a given error div.
-   *
-   * @param {string} inputId The ID (incl #) of the input the error relates to
-   * @param {string} errorDiv The ID (incl #) of the div where the error msg will be rendered
-   * @param {string} errorMsg The error message text
-   */
+    * Renders an error message for a given input in a given error div.
+    *
+    * @param {string} inputId The ID (incl #) of the input the error relates to
+    * @param {string} errorDiv The ID (incl #) of the div where the error msg will be rendered
+    * @param {string} errorMsg The error message text
+    */
     function renderError(inputId, errorDiv, errorMsg) {
         $(inputId).addClass('invalid');
         $(`label[for=${inputId.slice(1)}]`).addClass('invalid');
@@ -59,11 +58,11 @@ export function initSignupForm() {
     }
 
     /**
-   * Clears error styling and message for a given input and error div.
-   *
-   * @param {string} inputId The ID (incl #) of the input the error relates to
-   * @param {string} errorDiv The ID (incl #) of the div where the error msg is currently rendered
-   */
+    * Clears error styling and message for a given input and error div.
+    *
+    * @param {string} inputId The ID (incl #) of the input the error relates to
+    * @param {string} errorDiv The ID (incl #) of the div where the error msg is currently rendered
+    */
     function clearError(inputId, errorDiv) {
         $(inputId).removeClass('invalid');
         $(`label[for=${inputId.slice(1)}]`).removeClass('invalid');
